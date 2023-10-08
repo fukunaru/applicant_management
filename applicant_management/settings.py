@@ -11,7 +11,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 SECRET_KEY = 'django-secret-key'
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'applicant_management.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'fukuyamanaru.pythonanywhere.com']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 from django.core.management.utils import get_random_secret_key
