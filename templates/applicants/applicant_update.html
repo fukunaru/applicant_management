@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1>{{ applicant.name }}の情報を編集</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.as_p }}
+      </div>
+      <button type="submit" class="btn btn-primary">更新</button>
+    </form>
+    <a href="{% url 'applicant:applicant_detail' applicant.pk %}" class="btn btn-secondary mt-3">詳細に戻る</a>
+  </div>
+{% endblock %}

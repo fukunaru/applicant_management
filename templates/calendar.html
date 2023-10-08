@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カレンダーページ</title>
+    <!-- FullCalendarライブラリを読み込む -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.js"></script>
+    <!-- FullCalendarテーマを読み込む -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css">
+    <!-- 他の<head>内の要素を追加 -->
+    <style>
+        /* 土曜日の背景色を薄い青に設定 */
+        .fc-sat {
+            background-color: #cfe2ff;
+        }
+
+        /* 日曜日の背景色を薄い赤に設定 */
+        .fc-sun {
+            background-color: #ffcfcf;
+        }
+
+        /* 祝日の背景色を薄い緑に設定 */
+        .fc-holiday {
+            background-color: #c7f0c7;
+        }
+    </style>
+    <script>
+        // Djangoコンテキスト変数からApplicantデータを取得
+        var events = [
+            {% for applicant in applicants %}
+            {
+                title: "{{ applicant.name }}",  // 名前を表示
+                start: "{{ applicant.interview_date_time|date:'Y-m-d\\TH:i:s' }}",  // 面談日時を表示
+                url: "/applicant/applicant_detail/{{ applicant.pk }}",  // 詳細ページへのリンク
+            },
+            {% endfor %}
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'ja', // 日本語ロケールを設定
+                events: events,  // イベントデータをカレンダーにセット
+                dayCellClassNames: function(arg) {
+                    // 土曜日は.fc-satクラスを、日曜日は.fc-sunクラスを追加
+                    if (arg.date.getDay() === 6) {
+                        return ['fc-sat'];
+                    }
+                    if (arg.date.getDay() === 0) {
+                        return ['fc-sun'];
+                    }
+                    // 祝日の場合、.fc-holidayクラスを追加
+                    // ここでは例として祝日として判定していますが、実際の祝日情報に合わせて判定を行ってください
+                    // この例では、2023年の9月の15日を祝日としています
+                    var holidays = ['2023-09-15'];
+                    var dateString = arg.date.getFullYear() + '-' + (arg.date.getMonth() + 1).toString().padStart(2, '0') + '-' + arg.date.getDate().toString().padStart(2, '0');
+                    if (holidays.includes(dateString)) {
+                        return ['fc-holiday'];
+                    }
+                    return [];
+                },
+            });
+            calendar.render();
+        });
+    </script>
+</head>
+<body>
+    <!-- カレンダーを表示するための<div>要素 -->
+    <div id="calendar" style="width: 900px; height: 900px; "></div>
+    <!-- 他の<body>内の要素を追加 -->
+</body>
+</html>

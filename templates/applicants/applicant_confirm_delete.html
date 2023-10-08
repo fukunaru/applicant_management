@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h4">応募者削除</h1>
+                </div>
+                <div class="card-body">
+                    <p class="mb-4">以下の応募者を削除しますか？</p>
+                    <p><strong>名前:</strong> {{ object.name }}</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger">削除</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'applicant:applicant_list' %}" class="btn btn-secondary">一覧に戻る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

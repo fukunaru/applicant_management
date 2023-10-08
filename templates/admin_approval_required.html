@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>
+  {{ pending_user.username }}さん、承認待ちです。
+</p>
+
+{% comment %} <a href="{% url 'admin_approval' %}">承認を行う</a> {% endcomment %}
+
+{% endblock %}

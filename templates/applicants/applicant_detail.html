@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    {% if applicant %}
+      <h1>顧客詳細 - {{ applicant.name }}</h1>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">{{ applicant.name }}の詳細</h2>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>名前:</strong> {{ applicant.name }}</li>
+            <li class="list-group-item"><strong>年齢:</strong> {{ applicant.age }}</li>
+            <li class="list-group-item"><strong>性別:</strong> {{ applicant.gender }}</li>
+            <li class="list-group-item"><strong>現職:</strong> {{ applicant.current_occupation }}</li>
+            <li class="list-group-item"><strong>現在の給与:</strong> {{ applicant.current_salary }}</li>
+            <li class="list-group-item"><strong>資格/経験:</strong> {{ applicant.qualifications_experience }}</li>
+            <li class="list-group-item"><strong>希望給与:</strong> {{ applicant.desired_salary }}</li>
+            <li class="list-group-item"><strong>希望職種/希望企業:</strong> {{ applicant.desired_position_company }}</li>
+            <li class="list-group-item"><strong>特記事項:</strong> {{ applicant.features }}</li>
+            <li class="list-group-item"><strong>履歴書:</strong> 
+              {% if applicant.resume_file %}
+                <a href="{{ applicant.resume_file.url }}" target="_blank">ファイル</a>
+              {% else %}
+                ファイルなし
+              {% endif %}
+            </li>
+            <li class="list-group-item"><strong>転職後給与:</strong> {{ applicant.post_transition_salary }}</li>
+            <li class="list-group-item"><strong>転職後企業:</strong> {{ applicant.post_transition_company }}</li>
+            <li class="list-group-item"><strong>面接日時:</strong> {{ applicant.interview_date_time }}</li>
+            <li class="list-group-item"><strong>選考状況:</strong> {{ applicant.status }}</li>
+          </ul>
+          <div class="mt-3">
+            <a class="btn btn-primary" href="{% url 'applicant:applicant_update' applicant.pk %}">編集</a>
+            <a class="btn btn-danger" href="{% url 'applicant:applicant_delete' applicant.pk %}">削除</a>
+            <a class="btn btn-secondary" href="{% url 'applicant:applicant_list' %}">一覧に戻る</a>
+          </div>
+        </div>
+      </div>
+      
+    {% else %}
+      <p>該当する顧客情報が存在しません。</p>
+    {% endif %}
+  </div>
+{% endblock %}

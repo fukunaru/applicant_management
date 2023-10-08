@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="mb-4">応募者検索</h1>
+  <form method="get" class="mb-4">
+    <table class="table">
+      {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn btn-primary mt-2">検索</button>
+  </form>
+
+  <h2>検索結果</h2>
+  <ul class="list-group">
+    {% if applicants %}
+      {% for applicant in applicants %}
+        <li class="list-group-item">
+          <a href="{% url 'applicant:applicant_detail' applicant.pk %}">{{ applicant.name }}</a>
+        </li>
+      {% endfor %}
+    {% else %}
+      <li class="list-group-item">該当する応募者が見つかりません。</li>
+    {% endif %}
+  </ul>
+
+  <a href="{% url 'applicant:applicant_list' %}" class="mt-3">一覧に戻る</a>
+{% endblock %}
