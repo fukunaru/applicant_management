@@ -1,10 +1,8 @@
-from typing import Any
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
@@ -82,21 +80,22 @@ class UserLoginView(LoginView):
     template_name = 'user_login.html'
     authentication_form = UserLoginForm
 
+# ユーザーログイン
+class UserLoginView(LoginView):
+    template_name = 'user_login.html'
+    authentication_form = UserLoginForm
+
     def form_valid(self, form):
-
         user = form.get_user()
-
-        if user.is_admin:
-            if user.is_pending_approval:  
-                return redirect('accounts:admin_approval_required')
-            else:
-                return super().form_valid(form)
-
-
         remember = form.cleaned_data['remember']
+        
+        if user.is_pending_approval:
+            return redirect('accounts:admin_approval_required')
+
         if remember:
             self.request.session.set_expiry(1200000)
         return super().form_valid(form)
+
 
 # ユーザーログアウト
 class UserLogoutView(LogoutView):

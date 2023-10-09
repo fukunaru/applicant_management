@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,12 +10,11 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-SECRET_KEY = 'django-secret-key'
+# SECRET_KEY = 'django-secret-key'
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'fukuyamanaru.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com', 'fukuyamanaru.pythonanywhere.com']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-from django.core.management.utils import get_random_secret_key
 SECRET_KEY = get_random_secret_key()  
 
 
@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'accounts',
     'applicant',
-    'schedule',
 ]
 
 AUTH_USER_MODEL = 'accounts.Users'
@@ -143,6 +142,9 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True 
 ACCOUNT_USER_REQUIRED = False
+
+
+
 
 # settings.py ファイル内でデータベースログを有効にする
 # LOGGING = {

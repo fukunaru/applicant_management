@@ -1,7 +1,4 @@
-from typing import Any
-from django.db import models
-from django.db.models.query import QuerySet
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -10,8 +7,6 @@ from applicant.models import Applicant
 from .forms import ApplicantForm,ApplicantSearchForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-import os
-from schedule.models import Event
 import json
 
 class ApplicantListView(LoginRequiredMixin,ListView):
@@ -102,7 +97,7 @@ class ApplicantCreateView(CreateView):
     
     def form_valid(self, form):
         form.instance.user = self.request.user
-        applicant = form.save
+        form.save()
         return super().form_valid(form)
     
 
