@@ -11,7 +11,7 @@ class ApplicantManager(models.Manager):
 
 
 class Applicant(models.Model):
-     # 応募者情報
+
     GENDER_CHOICES = [
         ('男性', '男性'),
         ('女性', '女性'),
@@ -38,12 +38,14 @@ class Applicant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+
+    
     user = models.ForeignKey(Users, on_delete=models.PROTECT, related_name='applicants')
     
     objects = ApplicantManager()
     
     class Meta:
         db_table = 'applicant'
-        app_label = 'schedule'
 
     
+

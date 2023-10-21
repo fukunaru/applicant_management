@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('applicant/',include('applicant.urls', namespace='applicant')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
+
 ]
 
 #DEBUGモードの場合はurlpatternsにMEDIA_URLと MEDIA_ROOTを

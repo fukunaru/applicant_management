@@ -11,7 +11,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECRET_KEY = 'django-secret-key'
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com', 'fukuyamanaru.pythonanywhere.com']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
@@ -48,7 +48,6 @@ MIDDLEWARE = [
    'django.contrib.auth.middleware.AuthenticationMiddleware',
    'django.contrib.messages.middleware.MessageMiddleware',  
    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   'allauth.account.middleware.AccountMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -146,6 +145,12 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True 
 ACCOUNT_USER_REQUIRED = False
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 
 
 

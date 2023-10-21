@@ -1,0 +1,5 @@
+# SQLiteデータベースファイルを無視
+db.sqlite3
+
+# local_settings.pyを無視
+local_settings.py

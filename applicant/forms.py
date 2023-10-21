@@ -10,7 +10,6 @@ class ApplicantForm(forms.ModelForm):
         model = Applicant
         user = forms.ModelChoiceField(queryset=Users.objects.all())
 
-        # admin_user = forms.ModelChoiceField(queryset=AdminUser.objects.all(), required=False)
         fields = [
             'name',
             'age',

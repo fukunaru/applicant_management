@@ -17,30 +17,6 @@ class ApplicantListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         # ログインユーザーに関連付けられた顧客のみをフィルタリング
         return Applicant.objects.filter(user=self.request.user)
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # context_object_name で指定した名前でコンテキストに追加
-    #     context['applicant_list'] = self.get_queryset()
-    #     return context
-
-  # other filter logic  
-
-        # order = self.request.GET.get('order','name')
-        # if order == 'name':
-        #     queryset = queryset.order_by('name')
-
-        # return queryset
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     pk = self.kwargs['pk'] 
-    #     applicant = Applicant.objects.get(pk=pk)
-    #     context['applicant'] = applicant
-    #     return context
-    
-    # def get_queryset(self):
-    #     return Applicant.objects.values_list('pk', 'name')
     
 
 
@@ -68,26 +44,7 @@ class ApplicantDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['applicant'] = self.get_object()  # ここでapplicantオブジェクトを追加
         return context
-    
-    # def get_queryset(self):
-    #     return Applicant.objects.all()
-
-    # def get_context_data(self, **kwargs):   
-    #     ctx = super().get_context_data(**kwargs)
-    #     ctx['applicant'] = get_object_or_404() 
-    #     return context
-        
-    
-    # def get_object(self):
-        # applicant_pk = self.kwargs['pk']
-        # print(applicant_pk)
-        # return Applicant.objects.get(pk=applicant_pk)
-    
-    
-        
-    
-    
-    
+       
 
 class ApplicantCreateView(CreateView):
     model = Applicant
@@ -108,26 +65,11 @@ class ApplicantUpdateView(UpdateView):
     success_url = reverse_lazy('applicant:applicant_list')
     
     
-    
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     applicant = form.save
-    #     return super().form_valid(form)
-    
 class ApplicantDeleteView(DeleteView):
     model = Applicant
     template_name = 'applicants/applicant_confirm_delete.html'
     success_url = reverse_lazy('applicant:applicant_list')
     
-   
-    
-    # def get_object(self):
-    #     return Applicant.objects.get(pk=self.kwargs['pk'])
-
-    # def delete(self, request, *args, **kwargs):
-    #     self.object = self.get_object()
-    #     self.object.delete()
-    #     return redirect('applicants:applicant_list') 
 
 class ApplicantSearchView(View):
     template_name = 'applicants/applicant_search.html'
@@ -234,6 +176,7 @@ def calendar_view(request):
 
     # 応募者から面談日時と名前のデータを取得し、eventsリストに追加
     for applicant in applicants:
+
         event = {
             'title': applicant.name,
             'start': applicant.interview_date_time.strftime('%Y-%m-%d %H:%M:%S'),
@@ -243,5 +186,5 @@ def calendar_view(request):
     # eventsデータをJSON形式に変換
     events_json = json.dumps(events)
 
-    context = {'events_json': events_json}
+    context = {'events_json': events_json, 'applicants': applicants }
     return render(request, 'calendar/calendar.html', context)

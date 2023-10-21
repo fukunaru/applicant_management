@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
+{% block navbar %}
+  {# Navigation barは除外する #}
+  <a class="navbar-brand ml-auto" href="/accounts/user_logout/">ログアウト</a>
+{% endblock %}
+
+{% csrf_token %}
+
 {% block content %}
-
-<p>
-  {{ pending_user.username }}さん、承認待ちです。
-</p>
-
-{% comment %} <a href="{% url 'admin_approval' %}">承認を行う</a> {% endcomment %}
-
+  {% if user.is_pending_approval %}
+    <p>{{ user.username }}さん、承認待ちです。</p>
+  {% else %}
+    <p>承認が完了しました。ログインしてください。</p>
+    <a href="{% url 'accounts:user_login' %}">ログイン</a>
+  {% endif %}
 {% endblock %}

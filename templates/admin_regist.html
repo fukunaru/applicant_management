@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<h1>管理者登録</h1>
+
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}

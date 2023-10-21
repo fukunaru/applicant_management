@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
+{% block navbar %}
+  {# Navigation barは除外する #}
+{% endblock %}
+
 {% block content %}
 
-<h1>マイページ</h1>
+<h1>{{ user.username }}のホームページ</h1>
+
+<p>名前: {{ user.username }}</p>
 
 <div>
     <h4>今月の面談数: {{ interviews_this_month }}人</h4>
@@ -11,31 +17,25 @@
     <h4>今月の内定者の人数: {{ selection_done_this_month }}人</h4>
 </div>
 
-{% include 'calendar.html' %}
+  <h2>イベントカレンダー</h2>
+  {% include 'calendar.html' with events=events %}  
+
 
 {% if applicants %}
-  <h2>進捗情報:</h2>
+  <h2>進捗一覧</h2>
+
   <ul>
-    {% for applicant in applicants %}
-      <li>応募者名: {{ applicant.name }}, 進捗: {{ applicant.status }}</li>
-    {% endfor %}
+   {% for applicant in applicants %}
+     <li>{{ applicant.name }}</li>
+   {% endfor %}
   </ul>
-</div>
-</div>
-</div>
 
-{% else %}
-  <p>進捗情報はありません。</p>
-</div>
-</div>
-</div>
 {% endif %}
-
 
   <h4>内定者の人数: {{ selection_done_all }}人</h4>
   <h4>面接中の人数: {{ interviews_in_progress_all }}人</h4>
   <h4>選考中の人数: {{ selection_in_progress_all }}人</h4>
-</div>
-</div>
-</div>
+
+<a href="{% url 'accounts:user_list' %}">ユーザ一覧へ</a>
+
 {% endblock %}
