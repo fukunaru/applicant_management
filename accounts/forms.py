@@ -1,6 +1,6 @@
 from django import forms
 from .models import Users
-from django.contrib.auth.password_validation import validate_password,get_default_password_validators
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 
 class RegistForm(UserCreationForm):

@@ -4,18 +4,16 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView,PasswordResetView,PasswordContextMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from .forms import RegistForm, UserLoginForm, AdminRegistForm
 from .models import Users
 from applicant.models import Applicant
 from django.http import JsonResponse
 from django.db import transaction
-from django.http import HttpResponseForbidden
 from django.contrib.auth import logout
 from django.views.generic.list import ListView
 from datetime import datetime
-from django.views.generic.edit import FormView
 
 
 
