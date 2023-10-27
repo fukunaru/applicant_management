@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="hidden" name="next" value="{{ request.GET.next}}">
-    <input type="submit" value="ログイン">
-
-</form>
-<a href="{% url 'accounts:password_reset' %}">パスワードを忘れた場合はこちら</a>
-
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="POST" class="text-center">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                <input type="submit" class="btn btn-primary mt-2" value="ログイン">
+            </form>
+            <p class="text-center mt-3">
+                <a href="{% url 'accounts:password_reset' %}">パスワードを忘れた場合はこちら</a>
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}

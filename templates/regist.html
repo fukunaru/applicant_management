@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>ユーザー登録</h1>
-
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="ユーザー登録">
-</form>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-left">ユーザー登録</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="text-left">
+                    <input type="submit" class="btn btn-primary" value="ユーザー登録">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

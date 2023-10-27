@@ -1,0 +1,9 @@
+/* ナビゲーションメニュー全体を中央寄せにする */
+.navbar {
+    justify-content: center;
+}
+
+/* ナビゲーションメニューのリンク（.navbar-brand）を等間隔に配置 */
+.navbar .navbar-brand {
+    margin: 0 100px; /* リンクの左右に15pxのマージンを設定 */
+}

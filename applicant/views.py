@@ -18,6 +18,12 @@ class ApplicantListView(LoginRequiredMixin,ListView):
         # ログインユーザーに関連付けられた顧客のみをフィルタリング
         return Applicant.objects.filter(user=self.request.user)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # show_applicant_tabs をコンテキストに追加
+        context['show_applicant_tabs'] = True  # 顧客リスト画面ではタブを表示する
+        # 他のコンテキスト変数を追加できます
+        return context
 
 
 class ApplicantDetailView(DetailView):
@@ -57,6 +63,13 @@ class ApplicantCreateView(CreateView):
         form.save()
         return super().form_valid(form)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # show_applicant_tabs をコンテキストに追加
+        context['show_applicant_tabs'] = True  # 顧客リスト画面ではタブを表示する
+        # 他のコンテキスト変数を追加できます
+        return context
+    
 
 class ApplicantUpdateView(UpdateView):
     model = Applicant
@@ -73,6 +86,13 @@ class ApplicantDeleteView(DeleteView):
 
 class ApplicantSearchView(View):
     template_name = 'applicants/applicant_search.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # show_applicant_tabs をコンテキストに追加
+        context['show_applicant_tabs'] = True  # 顧客リスト画面ではタブを表示する
+        # 他のコンテキスト変数を追加できます
+        return context
 
     def get(self, request, *args, **kwargs):
         form = ApplicantSearchForm(request.GET)
@@ -166,6 +186,7 @@ class ApplicantSearchView(View):
             queryset = queryset.filter(**filters)
 
         return queryset
+    
     
 
 

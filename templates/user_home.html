@@ -5,37 +5,32 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mt-4">
+  <h1 class="text-center">{{ user.username }}のホームページ</h1>
 
-<h1>{{ user.username }}のホームページ</h1>
-
-<p>名前: {{ user.username }}</p>
-
-<div>
+  <div class="mt-4">
     <h4>今月の面談数: {{ interviews_this_month }}人</h4>
     <h4>今月の面接中の人数: {{ interviews_in_progress_this_month }}人</h4>
     <h4>今月の選考中の人数: {{ selection_in_progress_this_month }}人</h4>
     <h4>今月の内定者の人数: {{ selection_done_this_month }}人</h4>
-</div>
+  </div>
 
-  <h2>イベントカレンダー</h2>
-  {% include 'calendar.html' with events=events %}  
+  <h2 class="mt-4">イベントカレンダー</h2>
+  {% include 'calendar.html' with events=events %}
 
+  {% if applicants %}
+    <h2 class="mt-4">進捗一覧</h2>
+    <ul>
+      {% for applicant in applicants %}
+        <li>{{ applicant.name }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
-{% if applicants %}
-  <h2>進捗一覧</h2>
-
-  <ul>
-   {% for applicant in applicants %}
-     <li>{{ applicant.name }}</li>
-   {% endfor %}
-  </ul>
-
-{% endif %}
-
-  <h4>内定者の人数: {{ selection_done_all }}人</h4>
+  <h4 class="mt-4">内定者の人数: {{ selection_done_all }}人</h4>
   <h4>面接中の人数: {{ interviews_in_progress_all }}人</h4>
   <h4>選考中の人数: {{ selection_in_progress_all }}人</h4>
 
-<a href="{% url 'accounts:user_list' %}">ユーザ一覧へ</a>
-
+  <a href="{% url 'accounts:user_list' %}" class="btn btn-primary mt-4">ユーザ一覧</a>
+</div>
 {% endblock %}

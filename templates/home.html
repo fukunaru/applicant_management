@@ -1,40 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">マイページ</h1>
 
-<h1>マイページ</h1>
+    <div style="padding: 10px;">
+        <h4>今月の面談数: {{ interviews_this_month }}人</h4>
+        <h4>今月の面接中の人数: {{ interviews_in_progress_this_month }}人</h4>
+        <h4>今月の選考中の人数: {{ selection_in_progress_this_month }}人</h4>
+        <h4>今月の内定者の人数: {{ selection_done_this_month }}人</h4>
+    </div>
 
-<div>
-    <h4>今月の面談数: {{ interviews_this_month }}人</h4>
-    <h4>今月の面接中の人数: {{ interviews_in_progress_this_month }}人</h4>
-    <h4>今月の選考中の人数: {{ selection_in_progress_this_month }}人</h4>
-    <h4>今月の内定者の人数: {{ selection_done_this_month }}人</h4>
-</div>
+    {% include 'calendar.html' %}
 
-{% include 'calendar.html' %}
+    {% if applicants %}
+    <h2>進捗情報:</h2>
+    <ul style="padding-left: 80px;">
+        {% for applicant in applicants %}
+        <li style="padding: 10px;">応募者名: {{ applicant.name }}, 進捗: {{ applicant.status }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    </div>
+    </div>
 
-{% if applicants %}
-  <h2>進捗情報:</h2>
-  <ul>
-    {% for applicant in applicants %}
-      <li>応募者名: {{ applicant.name }}, 進捗: {{ applicant.status }}</li>
-    {% endfor %}
-  </ul>
-</div>
-</div>
-</div>
+    {% else %}
+    <p style="padding: 10px;">進捗情報はありません。</p>
+    </div>
+    </div>
+    </div>
+    {% endif %}
 
-{% else %}
-  <p>進捗情報はありません。</p>
-</div>
-</div>
-</div>
-{% endif %}
-
-
-  <h4>内定者の人数: {{ selection_done_all }}人</h4>
-  <h4>面接中の人数: {{ interviews_in_progress_all }}人</h4>
-  <h4>選考中の人数: {{ selection_in_progress_all }}人</h4>
+    <div style="padding: 10px; padding-left: 80px;">
+    <h4>内定者の人数: {{ selection_done_all }}人</h4>
+    <h4>面接中の人数: {{ interviews_in_progress_all }}人</h4>
+    <h4>選考中の人数: {{ selection_in_progress_all }}人</h4>
+    </div>
 </div>
 </div>
 </div>

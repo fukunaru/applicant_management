@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="mb-4">応募者検索</h1>
-  <form method="get" class="mb-4">
+  <div class="text-center mb-4">
+    <h1>応募者検索</h1>
+  </div>
+
+  <form method="get" class="text-center mb-4">
     <table class="table">
       {{ form.as_table }}
     </table>
-    <button type="submit" class="btn btn-primary mt-2">検索</button>
+    <button type="submit" class="btn btn-primary">検索</button>
   </form>
 
-  <h2>検索結果</h2>
-  <ul class="list-group">
+  <div class="text-center mb-2">
+    <h2>検索結果</h2>
+  </div>
+
+  <ul class="list-group mb-4">
     {% if applicants %}
       {% for applicant in applicants %}
         <li class="list-group-item">
@@ -22,5 +28,7 @@
     {% endif %}
   </ul>
 
-  <a href="{% url 'applicant:applicant_list' %}" class="mt-3">一覧に戻る</a>
+  <div class="text-center">
+    <a href="{% url 'applicant:applicant_list' %}" class="mt-3">一覧に戻る</a>
+  </div>
 {% endblock %}
